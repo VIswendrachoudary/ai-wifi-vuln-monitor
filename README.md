@@ -1,42 +1,21 @@
-# 🛡️ AI Wi-Fi Vulnerability Monitor
+# Use base Linux image
+FROM ubuntu:22.04
 
-An AI-powered tool to monitor and classify Wi-Fi packets based on potential security weaknesses.
+# Set environment non-interactive
+ENV DEBIAN_FRONTEND=noninteractive
 
-## 🔍 Features
+# Install dependencies
+RUN apt update && apt install -y \
+    python3 python3-pip aircrack-ng tcpdump \
+    libpcap-dev git iproute2
 
-- 📡 Captures real-time Wi-Fi packets (via `airodump-ng` / `tcpdump`)
-- 🧠 Classifies packets using Machine Learning (weak vs strong auth)
-- 📊 Provides summary reports on packet security
-- 🐍 Built using Python with Scapy and scikit-learn
-- 🖥️ CLI-based interface with optional GUI visualization coming soon
+# Install Python libs
+COPY requirements.txt .
+RUN pip3 install -r requirements.txt
 
-## 🚀 How It Works
+# Copy your app
+COPY . /app
+WORKDIR /app
 
-1. **Packet Capture**  
-   Captures packets using external tools like `airodump-ng` or `tcpdump`.
-
-2. **Parsing with Scapy**  
-   Parses `.pcap` files and extracts features from each packet.
-
-3. **AI Classification**  
-   Uses a trained ML model to detect and label weak authentication attempts.
-
-4. **Summary Output**  
-   Outputs a summary of total packets analyzed and their classification.
-
-## 🧪 Requirements
-
-- Python 3.7+
-- scapy
-- scikit-learn
-- pandas
-- joblib
-- matplotlib (optional for future GUI)
-- aircrack-ng (for live capture)
-
-## ⚙️ Installation
-
-```bash
-git clone https://github.com/VIswendrachoudary/ai-wifi-vuln-monitor.git
-cd ai-wifi-vuln-monitor
-pip install -r requirements.txt
+# Run your Python CLI
+CMD ["python3", "monitor.py"]
