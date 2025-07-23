@@ -1,27 +1,42 @@
-# AI Wi-Fi Vulnerability Monitor 🔐📡
+# 🛡️ AI Wi-Fi Vulnerability Monitor
 
-A powerful AI-driven tool that monitors Wi-Fi packets for potential security vulnerabilities. Built using Python, Scapy, and machine learning, this system helps detect weak authentication patterns and insecure access points.
+An AI-powered tool to monitor and classify Wi-Fi packets based on potential security weaknesses.
 
----
+## 🔍 Features
 
-## 🚀 Features
+- 📡 Captures real-time Wi-Fi packets (via `airodump-ng` / `tcpdump`)
+- 🧠 Classifies packets using Machine Learning (weak vs strong auth)
+- 📊 Provides summary reports on packet security
+- 🐍 Built using Python with Scapy and scikit-learn
+- 🖥️ CLI-based interface with optional GUI visualization coming soon
 
-- 📶 **Real-Time Packet Capture** using `airodump-ng`, `aircrack-ng`, or `tcpdump`
-- 🧠 **AI Classification Engine** (Scikit-learn/PyTorch) for detecting vulnerable patterns
-- 📊 **Streamlit-based Dashboard** (optional) for live monitoring and visualization
-- 🐍 **Python-Driven CLI** for flexible terminal-based control
-- 🐳 Dockerized for easy cross-platform deployment
-- 🔒 Designed for **ethical** use in securing Wi-Fi networks
+## 🚀 How It Works
 
----
+1. **Packet Capture**  
+   Captures packets using external tools like `airodump-ng` or `tcpdump`.
 
-## 🛠️ Stack Used
+2. **Parsing with Scapy**  
+   Parses `.pcap` files and extracts features from each packet.
 
-- **Languages**: Python
-- **Libraries**: Scapy, Pandas, Sklearn, PyTorch, Subprocess, Streamlit
-- **Tools**: Airodump-ng, Aircrack-ng, Tcpdump
-- **Deployment**: Docker, Windows/Linux
+3. **AI Classification**  
+   Uses a trained ML model to detect and label weak authentication attempts.
 
----
+4. **Summary Output**  
+   Outputs a summary of total packets analyzed and their classification.
 
-## 📦 Installation
+## 🧪 Requirements
+
+- Python 3.7+
+- scapy
+- scikit-learn
+- pandas
+- joblib
+- matplotlib (optional for future GUI)
+- aircrack-ng (for live capture)
+
+## ⚙️ Installation
+
+```bash
+git clone https://github.com/VIswendrachoudary/ai-wifi-vuln-monitor.git
+cd ai-wifi-vuln-monitor
+pip install -r requirements.txt
